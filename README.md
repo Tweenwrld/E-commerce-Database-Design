@@ -85,34 +85,51 @@ The database design follows a well-structured entity-relationship model that cap
 
 ### Get all products with their brand and category
 ```sql
-SELECT p.product_id, p.product_name, b.brand_name, c.category_name
-FROM product p
-JOIN brand b ON p.brand_id = b.brand_id
-JOIN product_category c ON p.category_id = c.category_id;
+SELECT product.product_id, product.product_name, brand.brand_name, product_category.category_name
+FROM product
+JOIN brand ON product.brand_id = brand.brand_id
+JOIN product_category ON product.category_id = product_category.category_id;
 ```
 
 ### Get all variations of a specific product
 ```sql
-SELECT pi.SKU, pi.price, c.color_name, so.size_name
-FROM product_item pi
-JOIN product_variation pv ON pi.item_id = pv.item_id
-LEFT JOIN color c ON pv.color_id = c.color_id
-LEFT JOIN size_option so ON pv.size_id = so.size_id
-WHERE pi.product_id = 1;
+SELECT product_item.SKU, product_item.price, color.color_name, size_option.size_name
+FROM product_item
+JOIN product_variation ON product_item.item_id = product_variation.item_id
+LEFT JOIN color ON product_variation.color_id = color.color_id
+LEFT JOIN size_option ON product_variation.size_id = size_option.size_id
+WHERE product_item.product_id = 1;
 ```
 
 ### Get product attributes with their categories and types
 ```sql
-SELECT p.product_name, pa.attribute_name, pa.attribute_value, 
-       ac.category_name, at.type_name
-FROM product_attribute pa
-JOIN product p ON pa.product_id = p.product_id
-JOIN attribute_category ac ON pa.attribute_category_id = ac.attribute_category_id
-JOIN attribute_type at ON pa.attribute_type_id = at.attribute_type_id;
+SELECT product.product_name, product_attribute.attribute_name, product_attribute.attribute_value, 
+       attribute_category.category_name, attribute_type.type_name
+FROM product_attribute
+JOIN product ON product_attribute.product_id = product.product_id
+JOIN attribute_category ON product_attribute.attribute_category_id = attribute_category.attribute_category_id
+JOIN attribute_type ON product_attribute.attribute_type_id = attribute_type.attribute_type_id;
+```
+
+### Get all products with their primary images
+```sql
+SELECT product.product_name, product_image.image_url
+FROM product
+LEFT JOIN product_image ON product.product_id = product_image.product_id
+WHERE product_image.is_primary = 1 AND product_image.item_id IS NULL;
+```
+
+### Get inventory status of all product items
+```sql
+SELECT product.product_name, product_item.SKU, 
+       product_item.quantity_in_stock, product_item.price, product_item.is_available
+FROM product_item
+JOIN product ON product_item.product_id = product.product_id
+ORDER BY product.product_name;
 ```
 
 ## Contributors
-- [Your Name]
+Tweenwrld (Leonard Boma) 
 - [Team Member 1]
 - [Team Member 2]
 
