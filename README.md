@@ -9,7 +9,7 @@ This project demonstrates a comprehensive database design for an e-commerce plat
 - [Key Features](#key-features)
 - [Setup Instructions](#setup-instructions)
 - [Sample Queries](#sample-queries)
-- [Contributors](#contributors)
+- [Group Number](#group-number)
 
 ## Entity Relationship Diagram
 The database design follows a well-structured entity-relationship model that captures the complex relationships between products and their variations.
@@ -128,10 +128,8 @@ JOIN product ON product_item.product_id = product.product_id
 ORDER BY product.product_name;
 ```
 
-## Contributors
-Tweenwrld (Leonard Boma) 
-- [Team Member 1]
-- [Team Member 2]
+## Group Number 
+-Group 562
 
 ## License
 This project is created for educational purposes as part of a database design assignment.
