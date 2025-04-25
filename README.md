@@ -130,7 +130,7 @@ ORDER BY product.product_name;
 
 ## Contributors
 Tweenwrld (Leonard Boma) 
-- [Team Member 1]
+-  **[Bett Gideon](https://github.com/Bettgideon)**
 - [Team Member 2]
 
 ## License
